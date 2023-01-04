@@ -1,0 +1,31 @@
+{% extends 'dashboard/index_admin.html.twig' %}
+{% block title %}Nouvel agent{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouvel agent</h1>
+
+    {# {{ include('agent/_form.html.twig') }} #}
+<form action="{{ path('app_agent_add')}}" method="POST" class="form-group col-3">
+<label for="firstname">Prénom :</label><br>
+  <input type="text" id="firstname" name="firstname" class="form-control col-3"><br>
+
+<label for="lastname">Nom :</label><br>
+  <input type="text" id="lastname" name="lastname" class="form-control col-3"><br>
+
+<label for="matricule">Matricule :</label><br>
+  <input type="text" id="matricule" name="matricule" class="form-control col-3"><br>
+  
+  <label for="email" >Email :</label><br>
+  <input type="email" id="email" name="email" class="form-control col-3"><br>
+
+
+<label for="password">Mot de passe :</label><br>
+  <input type="password" id="password" name="password" class="form-control col-3"><br>
+
+
+  <input type="submit" value="Envoyer" class="btn btn-primary">
+</form> 
+<br>
+
+    <a href="{{ path('app_agent_index') }}" class="btn btn-warning col-2" role="button">Revenir</a>
+{% endblock %}

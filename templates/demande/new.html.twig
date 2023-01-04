@@ -1,0 +1,28 @@
+{% extends 'accueil/index.html.twig' %}
+
+{% block title %} Nouvelle demande {% endblock %}
+
+{% block actuality %}
+{% if app.user %}
+    {% if app.user.roles.0 == "ROLE_USER" %}
+        
+        <div class="container">
+            <h2 class="text-center pt-5" style="color: darkorange" >Demande d'ouverture de compte</h2>
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-info">{{ message }}</div>
+            {% endfor %}
+            {{ include('demande/_form.html.twig') }}
+            <a class="text-decoration-none" href="{{ path('app_index') }}">Revenir à l'accueil</a>
+        </div>
+    {% else %}
+        <div class="my-5 text-center text-white">
+            Oops!!  Vous n'avez pas l'accés à cette page, <a href="{{ path('app_index') }}">Page d'accueil</a>
+        </div>
+    {% endif %}
+{% else %}
+    <div class="my-5 text-center text-white">
+        Vous devez vous connecter pour continuer, <a href="{{ path('app_login') }}">Connexion</a>
+    </div>
+{% endif %}
+
+{% endblock %}

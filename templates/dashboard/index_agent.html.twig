@@ -1,0 +1,90 @@
+{% extends 'board.html.twig' %}
+
+{% block title %}Dashboard - Agent{% endblock %}
+
+{% block dash_title %}
+	<a class="navbar-brand ps-3" href="{{path('app_dashboard_agent')}}">Agent Dashboard</a>
+{% endblock %}
+{% block navigation %}
+    <div class="sb-sidenav-menu-heading">Paramètres Clients</div>
+	<!--Gestion des clients-->
+	<a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+		<div class="sb-nav-link-icon">
+			<i class="fas fa-columns"></i>
+		</div>
+		Clients
+		<div class="sb-sidenav-collapse-arrow">
+			<i class="fas fa-angle-down"></i>
+		</div>
+	</a>
+	<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+		<nav class="sb-sidenav-menu-nested nav">
+			<a class="nav-link" href="{{ path('app_client_ag_index')}}">Liste des Clients</a>
+			<a class="nav-link" href="{{ path('app_new_client_index')}}">Liste des nouveaux clients</a>
+			<a class="nav-link" href="{{ path('app_demande_agent_index') }}">Liste des nouvelles demandes</a>
+		</nav>
+	</div>
+	
+	<!--Gestion des comptes-->
+	<a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#collapseDem" aria-expanded="false" aria-controls="collapseDem">
+		<div class="sb-nav-link-icon">
+			<i class="fas fa-columns"></i>
+		</div>
+		Comptes bancaires
+		<div class="sb-sidenav-collapse-arrow">
+			<i class="fas fa-angle-down"></i>
+		</div>
+	</a>
+	<div class="collapse" id="collapseDem" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+		<nav class="sb-sidenav-menu-nested nav">
+            <a class="nav-link" href="{{ path('app_compte_index') }}">Gérer les comptes</a>
+			<a class="nav-link" href="{{ path('app_compte_new') }}">Ajouter un compte</a>
+		</nav>
+	</div>
+    <a class="nav-link" href="">
+		<div class="sb-nav-link-icon">
+			<i class="fas fa-table"></i>
+		</div>
+		Liste des Transactions
+	</a>
+	
+
+	
+    <!--Gestion des demandes-->
+	<a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#collapseInt" aria-expanded="false" aria-controls="collapseInt">
+		<div class="sb-nav-link-icon">
+			<i class="fas fa-columns"></i>
+		</div>
+		Demandes clients
+		<div class="sb-sidenav-collapse-arrow">
+			<i class="fas fa-angle-down"></i>
+		</div>
+	</a>
+	<div class="collapse" id="collapseInt" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+		<nav class="sb-sidenav-menu-nested nav">
+			<a class="nav-link" href="">Demandes Chéquier</a>
+			<a class="nav-link" href="">Demandes nouveaux comptes</a>
+		</nav>
+	</div>
+
+
+</div></div><div class="sb-sidenav-footer">
+<div class="small">Nous sommes le
+	{{ 'now' | date('m-d') }}</div></div></nav></div><div id="layoutSidenav_content"><main><div class="container-fluid px-4">
+
+{% for message in app.flashes('info') %}
+	<div class="alert alert-info">
+		{{ message }}
+	</div>
+{% endfor %}
+{% for message in app.flashes('success') %}
+	<div class="alert alert-success">
+		{{ message }}
+	</div>
+{% endfor %}
+{% for message in app.flashes('error') %}
+	<div class="alert alert-danger">
+		{{ message }}
+	</div>
+{% endfor %}{% endblock %}
+

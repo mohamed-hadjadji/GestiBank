@@ -1,0 +1,54 @@
+{% extends 'dashboard/index_client.html.twig' %}
+
+{% block body %}
+
+    <div class="container row">
+        {% for detail in details %}
+            <h1 class="my-2 text-center"><span class="text-info">{{ detail.type }}</span></h1>
+        {% endfor %}
+
+        <table class="table  d-flex col-6">
+            <tbody>
+            {# <tr>
+            <th>Id</th>
+            <td>{{ client.idUser.id  }}</td>
+        </tr> #}
+            {% for detail in details %}
+            <tr>
+                <th>Id : </th>
+                <td>{{ detail.id }}</td>
+            </tr>
+            <tr>
+                <th>Num_compte</th>
+                <td>{{ detail.numCompte }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ detail.type }}</td>
+            </tr>
+            <tr>
+                <th>Solde</th>
+                <td>{{ detail.solde }} €</td>
+            </tr>
+            <tr>
+                <th>Date_creation</th>
+                <td>{{ detail.dateCreation ? detail.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+            </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Aucun compte n'a été trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="d-flex">
+            <button class="btn-info rounded-3"><a class="text-dark text-decoration-none p-2 " href="{{ path('app_client_compte', {'id': app.user.id}) }}">Revenir à mes comptes</a></button>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

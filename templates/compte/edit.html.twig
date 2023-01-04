@@ -1,0 +1,15 @@
+{% extends 'dashboard/index_agent.html.twig' %}
+
+{% block title %}Edit Compte{% endblock %}
+
+{% block body %}
+    <h1>Modifier Compte</h1>
+
+    <div class="container">{{ include('compte/_form.html.twig', {'button_label': 'Modifier'}) }}
+        <a class="text-decoration-none btn-warning  py-1 px-4 border-2" href="{{ path('app_compte_index') }}">Revenir</a>
+
+        {{ include('compte/_delete_form.html.twig') }}
+    </div>
+
+
+{% endblock %}

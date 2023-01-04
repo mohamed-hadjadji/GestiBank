@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Configuration index{% endblock %}
+
+{% block body %}
+    <h1>Configuration index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Logo</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Service_titre</th>
+                <th>Contact_titre</th>
+                <th>Contact_desc</th>
+                <th>Telephone</th>
+                <th>Adresse</th>
+                <th>Mail</th>
+                <th>Facebook</th>
+                <th>Linkedin</th>
+                <th>Twitter</th>
+                <th>Footer_desc</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for configuration in configurations %}
+            <tr>
+                <td>{{ configuration.id }}</td>
+                <td>{{ configuration.logo }}</td>
+                <td>{{ configuration.titre }}</td>
+                <td>{{ configuration.description }}</td>
+                <td>{{ configuration.serviceTitre }}</td>
+                <td>{{ configuration.contactTitre }}</td>
+                <td>{{ configuration.contactDesc }}</td>
+                <td>{{ configuration.telephone }}</td>
+                <td>{{ configuration.adresse }}</td>
+                <td>{{ configuration.mail }}</td>
+                <td>{{ configuration.facebook }}</td>
+                <td>{{ configuration.linkedin }}</td>
+                <td>{{ configuration.twitter }}</td>
+                <td>{{ configuration.footerDesc }}</td>
+                <td>
+                    <a href="{{ path('app_configuration_show', {'id': configuration.id}) }}">show</a>
+                    <a href="{{ path('app_configuration_edit', {'id': configuration.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="15">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_configuration_new') }}">Create new</a>
+{% endblock %}

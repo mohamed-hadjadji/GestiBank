@@ -1,0 +1,71 @@
+{% extends 'dashboard/index_agent.html.twig' %}
+
+{% block title %}Demande index{% endblock %}
+
+{% block body %}
+    <div class="">
+        <h3 class="text-primary">Liste de demande d'ouverture d'un compte</h3>
+
+        <table class="table table-dark table-striped">
+            <thead>
+            <tr>
+                <th>Id_utilisateur</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Photo</th>
+                <th>Identite</th>
+                <th>Type</th>
+                <th>Etat</th>
+                <th>DateDemande</th>
+                <th>agent</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for demande in demandes %}
+                <tr>
+                    <td>{{ demande.idUser.id }}</td>
+                    <td>{{ demande.firstname }}</td>
+                    <td>{{ demande.lastname }}</td>
+                    <td>{{ demande.idUser.email }}</td>
+                    <td><a href="{{ path('app_demande_show', {'id': demande.id}) }}"><img height="100px" width="90px" src="{{asset('uploads/photos/'~ demande.photo ~'')}}"/></a></td>
+                    <td><a class="text-warning text-decoration-none" href="{{asset('uploads/identites/'~ demande.identite ~'')}}" target="_blank">Télécharger</a></td>
+                    <td>{{ demande.type }}</td>
+                    <td>{{ demande.etat }}</td>
+                    <td>{{ demande.dateDemande ? demande.dateDemande|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ demande.agent }}</td>
+                    <td>
+                    {% if demande.etat == "En cours" %}
+                        <button class="btn-success rounded-3"><a class="text-white text-decoration-none" href="{{path('app_demande_edit_etat', {'id': demande.id})}}">Valider</a></button>
+                        <button class="btn-danger rounded-3"><a class="text-white text-decoration-none" href="{{path('app_demande_edit_etat_ref', {'id': demande.id})}}">Rejeter</a></button>
+                    {% endif %}
+                    {% if demande.etat == "Rejeter" %}
+                        <button class="btn-danger rounded-3"><a class="text-white text-decoration-none" href="{{path('app_demande_agent_delete', {'id': demande.id})}}">Supprimer</a></button>
+                    {% endif %}   
+                    {% if demande.etat == "Valider" %}
+                    <form action="{{path('app_compte_new')}}" method='POST'>
+                    <input type="hidden" name="idAgent" value="{{demande.agent}}"/>
+                    <input type="hidden" name="idClient" value="{{demande.idUser.id}}"/>
+                    <input type="hidden" name="typeCompte" value="{{ demande.type }}"/>
+                    <input type="submit" value="Créer Compte" class="btn-primary rounded-3">
+                    {% endif %}
+                        {# <button class="btn-primary rounded-3 px-4"><a class="text-white text-decoration-none " href="{{ path('app_demande_show', {'id': demande.id}) }}">Voir</a></button>
+                        <button class="btn-success rounded-3"><a class="text-white text-decoration-none" href="{{path('app_compte_new', {'id': demande.id})}}">Valider</a></button>
+                        <button class="btn-danger rounded-3"><a class="text-white text-decoration-none" href="">Refuser</a></button> #}
+                    </form></td>
+                </tr>
+            {% else %} #}
+                <tr>
+                    <td colspan="7">aucune demande trouvée</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {# {% for agent in agents %}
+    <h1>Test {{ agent.firstname }}  {{ agent.lastname }}</h1> #}
+
+                {# {% endfor %}<h1>Ton id est : {{app.user.id}}</h1> #}
+        {#  href="{{ path('app_demande_new') }}">Nouvelle demande</a> #}
+    </div>
+{% endblock %}

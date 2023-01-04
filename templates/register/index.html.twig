@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire d'inscription{% endblock %}
+{% block nav %}
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container px-4 px-lg-5">
+
+        {% block logo %} <img class="img-fluid" width="15%" src="{{ asset('assets/img/logo.png') }}" alt="logo" /> {% endblock %}
+
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                <li class="nav-item"><a class="nav-link" href="{{ path('app_index') }}">Revenir vers l'accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">Se connecter</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block actuality %}
+{% if app.user %}
+    <div class="my-5 text-center text-white">
+        Vous êtes déjà connecté {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+    </div>
+
+    {% else %}
+    <div class="container">
+        <h1 class="my-5 text-center text-white">Formulaire d'inscription</h1>
+        {% for message in app.flashes('notice') %}
+            <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
+        {% if notification %}
+            <div class="alert alert-info">{{ notification }}</div>
+            <hr>
+        {% endif %}
+        {{ form(form) }}
+    </div>
+    {% endif %}
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,15 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+<label>Selectionner un agent</label>
+<select class="form-select mb-2" aria-label="Default select example" name="agent">
+
+    {% for agent in agents %}
+    <option value="{{ agent.id }}">{{ agent.firstname }}  {{ agent.lastname }}</option>
+    {% endfor %}
+
+</select>
+    <button class="btn btn-primary btn-xl mb-3" id="submitButton" type="submit">{{ button_label|default('Envoyer') }}</button>
+{{ form_end(form) }}
+
+
+

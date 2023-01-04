@@ -1,0 +1,48 @@
+{% extends 'dashboard/index_admin.html.twig' %}
+
+{% block title %}Liste des agents{% endblock %}
+
+{% block body %}
+    <div class="d-flex"><h3 class="col-6 text-black">Liste des agents</h3><div class=" col-6"><a href="{{ path('app_agent_new') }}" class="btn btn-warning float-end m-1" role="button">Créer un agent</a></div></div>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th class="col-1">Id_agent</th>
+                <th class="col-2">Email</th>
+                <th>Matricule</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Actions</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.matricule }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>
+                    <a class="text-warning text-decoration-none mx-2" href="{{ path('app_agent_show', {'id': user.id}) }}">Voir</a>
+                    <a class="text-white text-decoration-none m-1" href="{{ path('app_agent_edit', {'id': user.id}) }}"><img height="30px" src="{{ asset('assets/img/update.jpg')}}"></a></button>
+                    {# <a class="text-white text-decoration-none "class="text-white text-decoration-none " href="{{ path('app_agent_delete', {'id': user.id}) }}"><img height="30px" src="{{ asset('assets/img/delete.jpg')}}"></a> #}
+                    </td>
+                    <td>
+                    <form method="post" action="{{ path('app_agent_delete', {'id': user.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cet agent ?');">
+                    <button class="btn btn-danger btn-sm" role="button">Supprimer</button>
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">aucun agent trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<br>
+
+{% endblock %}

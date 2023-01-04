@@ -1,0 +1,12 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+submitContactForm:
+    path: /submit-contact-form
+    controller: App\Controller\ContactController::submitContactForm
+    methods: POST
+
+

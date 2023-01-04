@@ -1,0 +1,40 @@
+{% extends 'dashboard/index_agent.html.twig' %}
+
+{% block title %}Compte index{% endblock %}
+
+{% block body %}
+    <h1>Compte index</h1>
+
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Num_compte</th>
+                <th>Type</th>
+                <th>Solde</th>
+                <th>Date_creation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for compte in comptes %}
+            <tr>
+                <td>{{ compte.id }}</td>
+                <td>{{ compte.numCompte }}</td>
+                <td>{{ compte.type }}</td>
+                <td>{{ compte.solde }}</td>
+                <td>{{ compte.dateCreation ? compte.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <button class="btn-primary rounded-3 px-4"><a class="text-white text-decoration-none " href="{{ path('app_compte_show', {'id': compte.id}) }}">Voir</a></button>
+                    <button class="btn-warning rounded-3"><a class="text-white text-decoration-none " href="{{ path('app_compte_edit', {'id': compte.id}) }}">Modifier</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

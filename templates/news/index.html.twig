@@ -1,0 +1,70 @@
+{% extends 'dashboard/index_admin.html.twig' %}
+{% block title %} Liste des actualités {% endblock %}
+
+{% block body %}
+
+<div class="">
+    <h1>Liste des actualités</h1>
+    <h4 class="h4" align="center"><a href="{{path('app_news_new')}}" class="btn btn-primary">Ajouter une actualité</a></h4>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="container">
+        <h2 class="text-center m-3">Nos actualités</h2>
+        <hr class="divider mb-5" />
+
+        <div class="row text-center">
+            {% for new in news %}
+                <div class="col-lg-4">
+                    <img class="rounded-circle" src="{{asset('assets/img/uploads/'~ new.image)}}" alt="Generic placeholder image" width="300" height="300">
+                    <h3 class="my-2" style="color: black">{{new.title}}</h3>
+                    <p>{{new.description}}</p>
+                    <p>
+                        <a href="{{ path('app_news_edit', { id: new.id }) }}" class="btn btn-info">Modifier</a>
+                        <a href="{{ path('app_news_delete',{ id: new.id })}}", onclick="if(!confirm('Êtes-vous sûr de vouloir supprimer cette actualité ?')) { return false; }" class="btn btn-warning">Supprimer</a>
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {#  <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for new in news %}
+            <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4" style="width: 100%;height: auto;">
+                            <img src="{{asset('/assets/img/uploads/'~ new.image)}}" class="img-fluid rounded-start " alt="Image-Actualité" >
+                        </div>
+                        <div class="col-md-8", style="width: 100%;height: auto;">
+                            <div class="card-body">
+                                <h3 class="card-title">{{new.title}}</h3>
+                                <p class="card-text">{{new.description}}</p>
+                                <p>
+                                    <a href="{{ path('app_news_edit', { id: new.id }) }}" class="btn btn-info">Modifier</a>
+                                    <a href="{{ path('app_news_delete',{ id: new.id })}}", onclick="if(!confirm('Êtes-vous sûr de vouloir supprimer cette actualité ?')) { return false; }" class="btn btn-warning">Supprimer</a>
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="container">
+            <div class="row">
+                <div class="display flex justify-content-center mb-8">
+                    {{ knp_pagination_render(news) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    #}
+{%  endblock %}

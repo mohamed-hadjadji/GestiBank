@@ -1,0 +1,63 @@
+{% extends 'dashboard/index_client.html.twig' %}
+
+{% block body %}
+    <div class="container row">
+        <h1 class=" my-2 text-center">Mes informatios</h1>
+
+        <table class="table  d-flex col-6">
+            <tbody>
+            {# <tr>
+            <th>Id</th>
+            <td>{{ client.idUser.id  }}</td>
+        </tr> #}
+            <tr>
+                <th >Prénom : </th>
+                <td>{{ client.firstname  }}</td>
+            </tr>
+            <tr>
+                <th>Nom : </th>
+                <td>{{ client.lastname  }}</td>
+            </tr>
+            <tr>
+                <th>Email : </th>
+                <td>{{ client.idUser.email  }}</td>
+            </tr>
+            <tr>
+                <th>Photo : </th>
+                <td><img height="250px" width="200"  src="{{asset('uploads/photos/'~ client.photo ~'')}}"/></td>
+            </tr>
+            <tr>
+                <th>ma piéce d'identité : </th>
+                <td><a href="{{asset('uploads/identites/'~ client.identite ~'')}}" target="_blank" class="text-decoration-none ">Télécharger</a></td>
+            </tr>
+            <tr>
+                <th>Type de compte : </th>
+                <td>{{ client.type }}</td>
+            </tr>
+            <tr>
+                <th>Staut de compte : </th>
+                <td>{{ client.etat }}</td>
+            </tr>
+            <tr>
+                <th>Date d'ouverture : </th>
+                <td>{{ client.dateDemande ? client.dateDemande|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Actions : </th>
+                <td>
+                    <div class="d-flex">
+                        <button class="btn-secondary rounded"><a class="text-white text-decoration-none" href="#">Mise à jour</a></button>
+
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div><button class="btn-dark m-3 rounded p-2"><a class="text-warning text-decoration-none" href="{{ path('app_client_pass', {'id': app.user.id }) }}">Changer mot de passe</a></button></div>
+
+    </div>
+
+
+
+
+{% endblock %}

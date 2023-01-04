@@ -1,0 +1,42 @@
+{% extends 'dashboard/index_agent.html.twig' %}
+
+{% block title %}Compte{% endblock %}
+
+{% block body %}
+    <h1>Compte</h1>
+
+    <table class="table d-flex">
+        <tbody>
+            <tr>
+                <th>Id :</th>
+                <td>{{ compte.id }}</td>
+            </tr>
+            <tr>
+                <th>Client :</th>
+                <td>{{ compte.User.email }}</td>
+            </tr>
+            <tr>
+                <th>Num_compte :</th>
+                <td>{{ compte.numCompte }}</td>
+            </tr>
+            <tr>
+                <th>Type :</th>
+                <td>{{ compte.type }}</td>
+            </tr>
+            <tr>
+                <th>Solde :</th>
+                <td>{{ compte.solde }}</td>
+            </tr>
+            <tr>
+                <th>Date_creation :</th>
+                <td>{{ compte.dateCreation ? compte.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="text-decoration-none d-block mb-2" href="{{ path('app_compte_index') }}">Revenir à la liste</a>
+
+    <a class="text-decoration-none btn-warning  py-1 px-4 border-2 " href="{{ path('app_compte_edit', {'id': compte.id}) }}">Modifier</a>
+
+    {{ include('compte/_delete_form.html.twig') }}
+{% endblock %}

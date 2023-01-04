@@ -1,0 +1,39 @@
+{% extends 'dashboard/index_admin.html.twig' %}
+
+{% block title %}Agent{% endblock %}
+
+{% block body %}
+    <h1>Agent</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th class="col-2">Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th class="col-2">Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th class="col-2">Matricule</th>
+                <td>{{ user.matricule }}</td>
+            </tr>
+            <tr>
+                <th class="col-2">Prénom</th>
+                <td>{{ user.firstname }}</td>
+            </tr>
+            <tr>
+                <th class="col-2">Nom</th>
+                <td>{{ user.lastname }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+       {{ include('agent/_delete_form.html.twig') }}
+    <a href="{{ path('app_agent_index') }}" class="btn btn-warning col-2" role="button">Revenir</a>
+
+    {# <a href="{{ path('app_agent_edit', {'id': user.id}) }}">edit</a> #}
+
+
+{% endblock %}

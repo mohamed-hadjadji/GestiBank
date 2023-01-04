@@ -1,0 +1,48 @@
+{% extends 'dashboard/index_admin.html.twig' %}
+
+{% block title %}Messages{% endblock %}
+
+{% block body %}
+    <h1>Messages reçus</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                {# <th>Id</th> #}
+                <th>Fullname</th>
+                <th>Email</th>
+                <th>Tel</th>
+                <th>Message</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+<tbody>
+    {% for contact in contacts %}
+        <tr>
+            {# <td>{{ contact.id }}</td> #}
+            <td>{{ contact.fullname }}</td>
+            <td>{{ contact.email }}</td>
+            <td>{{ contact.tel }}</td>
+            <td>{{ contact.message }}</td>
+            <td>
+                <div class="row">
+                    <a href="{{ path('app_contact_show', {'id': contact.id}) }}" class="btn btn-primary btn-sm" role="button" style="display: inline-block;">Montrer</a></td>
+                    <td>
+                    <form method="post" action="{{ path('app_contact_delete', {'id': contact.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');" style="display: inline-block;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ contact.id) }}">
+                        <button class="btn btn-danger btn-sm" style="display: inline-block;">Supprimer</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+    {% endfor %}
+</tbody>
+
+    </table>
+
+    {# <a href="{{ path('app_contact_new') }}">Create new</a> #}
+{% endblock %}

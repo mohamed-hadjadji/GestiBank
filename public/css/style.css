@@ -1,0 +1,14 @@
+#carouselExampleFade{
+    width: 50%;
+    margin: auto;
+    margin-left: 0px;
+}
+.carousel-item{
+}
+.texte{
+    display:table-cell;
+    vertical-align: middle;
+    text-align:center;
+}
+   
+

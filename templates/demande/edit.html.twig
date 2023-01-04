@@ -1,0 +1,9 @@
+{% extends 'dashboard/index_admin.html.twig' %}
+
+{% block title %}Edit Demande{% endblock %}
+
+{% block body %}
+    <h1>Modifier une demande</h1>
+    {{ include('demande/_form.html.twig', {'button_label': 'Modifier'}) }}
+    <a class="text-info fw-bold text-decoration-none m-1" href="{{ path('app_demande_index') }}">Revenir à la liste</a>
+{% endblock %}

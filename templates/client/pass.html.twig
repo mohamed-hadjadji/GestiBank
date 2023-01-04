@@ -1,0 +1,14 @@
+{% extends 'dashboard/index_client.html.twig' %}
+
+{% block title %}Modifier mot de passe{% endblock %}
+
+{% block body %}
+    <div class="container col-6">
+        <h1 class="my-5 text-center">Modifier mon mot de passe</h1>
+        {% if notification %}
+            <div class="alert alert-info">{{ notification }}</div>
+        {% endif %}
+        {{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        <div class="btn btn-warning my-3"><a class="fw-bold text-decoration-none text-dark mb-5" href="{{ path('app_client_show', {'id': app.user.id }) }}">Retour à mon profil</a></div>
+    </div>
+{% endblock %}

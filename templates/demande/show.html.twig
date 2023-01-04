@@ -1,0 +1,51 @@
+{% extends 'dashboard/index_admin.html.twig' %}
+
+{% block title %}Demande{% endblock %}
+
+{% block body %}
+    <h1>Détail demande</h1>
+
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ demande.id }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td><img height="280px" width="200"  src="{{asset('uploads/photos/'~ demande.photo ~'')}}"/></td>
+            </tr>
+            <tr>
+                <th>Identite</th>
+                <td><a href="{{asset('uploads/identites/'~ demande.identite ~'')}}" target="_blank">Télécharger</a></td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ demande.type }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ demande.etat }}</td>
+            </tr>
+            <tr>
+                <th>DateDemande</th>
+                <td>{{ demande.dateDemande ? demande.dateDemande|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Actions</th>
+                <td>
+                    <div class="d-flex">
+                        <button class="btn-success px-3 mx-4"><a class="text-white text-decoration-none" href="{{ path('app_demande_edit', {'id': demande.id}) }}">Modifier</a></button>
+                        <a class="">{{ include('demande/_delete_form.html.twig') }}</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="text-info fw-bold text-decoration-none" href="{{ path('app_demande_index') }}">Revenir à la liste</a>
+
+
+
+
+{% endblock %}
