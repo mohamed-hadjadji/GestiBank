@@ -16,7 +16,7 @@ class ConfigurationType extends AbstractType
     {
         $builder
             ->add('logo', FileType::class, [
-                'label' => 'Votre Avatar (Image file)',
+                'label' => 'Votre logo (Image file)',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
