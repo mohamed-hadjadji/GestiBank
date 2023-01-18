@@ -39,11 +39,13 @@ class ChequierController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $idAgent = $request->get('idAgent');
             $compte = $request->get('compte');
             $chequier->setEtat('En-cours');
             $chequier->setDate(new \DateTimeImmutable());
             $chequier->setUser($this->getUser());
             $chequier->setCompte($compte);
+            $chequier->setIdAgent($idAgent);
             $chequierRepository->save($chequier, true);
 
             return $this->redirectToRoute('app_chequier_index', [], Response::HTTP_SEE_OTHER);

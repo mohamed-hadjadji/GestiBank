@@ -30,6 +30,9 @@ class Chequier
     #[ORM\Column(type: Types::BIGINT)]
     private ?string $compte = null;
 
+    #[ORM\Column]
+    private ?int $id_agent = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,6 +94,18 @@ class Chequier
     public function setCompte(string $compte): self
     {
         $this->compte = $compte;
+
+        return $this;
+    }
+
+    public function getIdAgent(): ?int
+    {
+        return $this->id_agent;
+    }
+
+    public function setIdAgent(int $id_agent): self
+    {
+        $this->id_agent = $id_agent;
 
         return $this;
     }
