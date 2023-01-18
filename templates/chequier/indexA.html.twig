@@ -1,4 +1,4 @@
-{% extends 'dashboard/index_client.html.twig' %}
+{% extends 'dashboard/index_agent.html.twig' %}
 
 {% block title %}Chequier index{% endblock %}
 
@@ -9,22 +9,33 @@
         <thead>
             <tr>
                 <th>Numéro</th>
+                <th>Client</th>
                 <th>Compte</th>
-                <th>Quantite</th>                
+                <th>Quantite</th>
                 <th>Date</th>
                 <th>Etat</th>
+               
                 
+                <th>Validation</th>
             </tr>
         </thead>
         <tbody>
         {% for chequier in chequiers %}
             <tr>
                 <td>{{ chequier.id }}</td>
+                <td>{{ chequier.user.email }}</td>
                 <td>{{ chequier.compte }}</td>
                 <td>{{ chequier.quantite }}</td>
                 <td>{{ chequier.date ? chequier.date|date('Y-m-d') : '' }}</td>
                 <td>{{ chequier.etat }}</td>
                 
+                {% if chequier.etat == "En-cours" %}
+                <td>
+        
+                    <button class="btn-success rounded-3"><a class="text-white text-decoration-none" href="{{ path('app_chequier_edit', {'id': chequier.id}) }}">Valider</a></button>
+                </td>{% else %}
+                <td>Chéquier envoyer</td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -34,5 +45,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_chequier_new') }}">Nouveau chéquier</a>
+
 {% endblock %}

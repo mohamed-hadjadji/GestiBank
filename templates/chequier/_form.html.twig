@@ -1,12 +1,15 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    {% for compte in comptes %}
+    
     <label>Selectionner un compte</label>
     <select class="form-select mb-2" aria-label="Default select example" name="compte">
+    {% for compte in comptes %}
         <option value="{{ compte.numCompte }}"> {{ compte.numCompte }} </option>
+    {% endfor %}
     </select>
-    <input type="hidden" name="idAgent" value="{{compte.idAgent}}"/>
-     {% endfor %}
+    {% for compte in comptes %}
+       <input type="hidden" name="idAgent" value="{{compte.idAgent}}"/>
+    {% endfor %}
    <button class="btn btn-primary btn-xl mb-3" id="submitButton" type="submit">{{ button_label|default('Envoyer') }}</button>
 
 {{ form_end(form) }}
