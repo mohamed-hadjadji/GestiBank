@@ -49,10 +49,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $lastname = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Chequier::class, orphanRemoval: true)]
+    private Collection $chequiers;
+
     public function __construct()
     {
         $this->demandes = new ArrayCollection();
         $this->comptes = new ArrayCollection();
+        $this->chequiers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -233,6 +237,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Chequier>
+     */
+    public function getChequiers(): Collection
+    {
+        return $this->chequiers;
+    }
+
+    public function addChequier(Chequier $chequier): self
+    {
+        if (!$this->chequiers->contains($chequier)) {
+            $this->chequiers->add($chequier);
+            $chequier->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChequier(Chequier $chequier): self
+    {
+        if ($this->chequiers->removeElement($chequier)) {
+            // set the owning side to null (unless already changed)
+            if ($chequier->getUser() === $this) {
+                $chequier->setUser(null);
+            }
+        }
+
         return $this;
     }
 }
