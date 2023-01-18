@@ -18,9 +18,17 @@ class ChequierController extends AbstractController
     public function index(ChequierRepository $chequierRepository): Response
     {
         return $this->render('chequier/index.html.twig', [
-            'chequiers' => $chequierRepository->findAll(),
+            'chequiers' => $chequierRepository->findBy(array("user" => $this->getUser()->getId())),
         ]);
     }
+
+    // #[Route('/', name: 'app_chequier_index', methods: ['GET'])]
+    // public function index(ChequierRepository $chequierRepository): Response
+    // {
+    //     return $this->render('chequier/index.html.twig', [
+    //         'chequiers' => $chequierRepository->findAll(),
+    //     ]);
+    // }
 
     #[Route('/new', name: 'app_chequier_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ChequierRepository $chequierRepository, CompteRepository $compteRepository): Response
